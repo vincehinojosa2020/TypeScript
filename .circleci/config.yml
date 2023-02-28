@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  veracode: ware2go/veracode@0.1.68
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -24,3 +27,6 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - veracode/scan-typescript:
+          verbose: true
+          target-directory: ~/repo/<< parameters.working-directory >>
